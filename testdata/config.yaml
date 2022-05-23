@@ -1,0 +1,19 @@
+drivers:
+  - type: "watchat.driver.mysql"
+    name: "mysqlTest"
+    metric_type: "gauge"
+    labels:
+      group: "arch"
+      service: "elance"
+      module: "goods"
+    config:
+      source: "main"
+      query: "select count(*) from users where id > ?"
+      bind_var:
+        - 1
+      interval: "1s"
+sources:
+  - name: "main"
+    type: "mysql"
+    config:
+      dsn: "root:123456@@tcp(localhost:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
